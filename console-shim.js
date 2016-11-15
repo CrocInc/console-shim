@@ -1,9 +1,12 @@
 /**
+ * Modified version of:
  * @preserve console-shim 1.0.3
  * https://github.com/kayahr/console-shim
  * Copyright (C) 2011 Klaus Reimer <k@ailis.de>
  * Licensed under the MIT license
  * (See http://www.opensource.org/licenses/mit-license)
+ * Path list:
+ *	conditional compilation (cc_on) replaced with document.documentMode check
  */
  
  
@@ -67,8 +70,8 @@ if (!console["error"]) console.error = console.log;
 // Wrap the log methods in IE (<=9) because their argument handling is wrong
 // This wrapping is also done if the __consoleShimTest__ symbol is set. This
 // is needed for unit testing.
-if (window["__consoleShimTest__"] != null || 
-    eval("/*@cc_on @_jscript_version <= 9@*/"))
+if (window["__consoleShimTest__"] != null || document.documentMode < 9)
+// originaly was (not work in IE emulation): eval("/*@cc_on @_jscript_version <= 9@*/"))
 {
     /**
      * Wraps the call to a real IE logging method. Modifies the arguments so

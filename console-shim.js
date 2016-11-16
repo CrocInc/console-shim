@@ -5,8 +5,9 @@
  * Copyright (C) 2011 Klaus Reimer <k@ailis.de>
  * Licensed under the MIT license
  * (See http://www.opensource.org/licenses/mit-license)
- * Path list:
- *	conditional compilation (cc_on) replaced with document.documentMode check
+ * Modifications of original lib:
+ *	- conditional compilation (cc_on) was replaced with document.documentMode check 
+ *    (reason: @_jscript_version doesn't work in emulation mode, e.g. in IE11 we emulates IE8, so logging fails)
  */
  
  
@@ -70,7 +71,7 @@ if (!console["error"]) console.error = console.log;
 // Wrap the log methods in IE (<=9) because their argument handling is wrong
 // This wrapping is also done if the __consoleShimTest__ symbol is set. This
 // is needed for unit testing.
-if (window["__consoleShimTest__"] != null || document.documentMode < 9)
+if (window["__consoleShimTest__"] != null || document.documentMode <= 9)
 // originaly was (not work in IE emulation): eval("/*@cc_on @_jscript_version <= 9@*/"))
 {
     /**

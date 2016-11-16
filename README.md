@@ -1,8 +1,17 @@
 console-shim
 ============
 
+Description (forked)
+-----------
+It's a fork of https://github.com/kayahr/console-shim library.
+The fork contains the following changes:
+- conditional compilation (`@cc_on`) was replaced with `document.documentMode` check.
+  Reason: `@_jscript_version` doesn't work in emulation mode, e.g. in IE11 we emulates IE8, so logging fails.
+- applied PR https://github.com/kayahr/console-shim/pull/8 to remove possible memory leak in old IE
+- removed "log4javascript" support
+- added time/timeEnd wrapping (similar to log/debug/etc methods) for the case of IE8 emulation in newer IE (IE11)
 
-Description
+Description (original)
 -----------
 
 This small shim implements or completes `window.console` on browsers which
@@ -10,13 +19,6 @@ have no or incomplete console support.  The goal is to be able to use the
 console in JavaScript applications without having to worry about JavaScript
 errors which might occur if a browser does not provide a native console or
 has an incomplete console implementation. 
-
-If no native console is present and an other logging facility is available
-(like [log4javascript](http://log4javascript.org/), which is currently the
-only supported alternate logging facility) then the emulated console is
-linked to this logging facility.  If no alternative logging facility is
-found then a dummy console is emulated which silently ignores all logging
-attempts.
 
 
 Implemented functions
